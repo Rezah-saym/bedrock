@@ -1,0 +1,37 @@
+.image-container {
+  display: block;
+  width: 100%;
+  overflow: hidden;
+  text-align: center; }
+
+.profile-picture {
+  width: 122px;
+  height: 122px;
+  overflow: hidden;
+  border-radius: 50%;
+  border: 2px solid #5c1f1f;
+  margin: 20px auto;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover; }
+
+.input_file {
+  display: block; }
+
+.form_post {
+  margin-top: 51px; }
+
+.input_image {
+  margin-top: 20px; }
+
+.image_preview {
+  border: 1px solid #5c1f1f;
+  max-width: 17%;
+  margin-top: 1rem;
+  display: block; }
+
+.label_title {
+  display: block; }
+
+.loading-animation {
+  color: black; }
