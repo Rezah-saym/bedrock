@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mon compte - la boutique française {% endblock %}
+
+{% block content %}
+    
+   
+    <div class="card">
+      <div class="card-body">
+        <blockquote class="blockquote">
+          <h1> Mon compte </h1>
+           <p> Bienvenue  {{app.user.firstname}}   dans votre compte. </p>
+          <footer class="card-blockquote"><cite title="Source title">Tu ne remarques rien ? Ou plutôt ne remarques-tu pas l’absence de ce que tu devrais remarquer ?</cite></footer>
+        </blockquote>
+      </div>
+    </div>
+    <div class='row'>
+        <h2 class='m-2'>Paramètre</h2>
+        <a href='{{path('app_account_password')}}' class='m-2'>Modifier son mot de passe</a>
+    </div>
+
+{% endblock %}

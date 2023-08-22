@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ products[0].product.name }} - la boutique Française{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-5 container_image mb-3"> 
+        <img src="/uploads/{{ products[0].product.illustration }}" alt="{{ products[0].product.name }}" class="img-fluid d-block">
+        <a href="{{ path('app_products') }}" class="btn btn-outline-dark w-25 mt-3"> Nos produits</a>
+        
+    </div>
+
+    <div class="col-md-7 my-auto">
+        <h3>{{ products[0].product.name }}</h3>
+        <p>{{ products[0].product.subtitle }}</p>
+        <span class="product-page-price">{{ products[0].product.price|number_format(2, ',', '.') }} €</span>
+        <hr>
+        <p>{{ products[0].product.description }}</p>
+        <a href="{{ path('one_to_carte', {'id': products[0].product.id}) }}" class="btn btn-primary">Ajouter au panier</a>
+        <a href="{{ path('app_carte') }}" class="btn btn-outline-dark float-end"> Voir dans le panier</a>
+        <div class="bloc-quantity mt-3">
+            {{ products[0].quantity }}
+            <a href="{{ path('remove_one_carte', {'id': products[0].product.id}) }}" class="link_moins">
+                <img src="{{ asset('assets/images/moins.png') }}" height="25px" alt="Supprimer un produit" class="image_quantity">
+            </a>
+            <span class="titre_quantity small">Quantité</span>
+        </div>
+    </div>
+</div>
+{% endblock %}
