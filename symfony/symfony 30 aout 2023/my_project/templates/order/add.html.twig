@@ -1,0 +1,78 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Payement de ma commande - la boutique Française{% endblock %}
+
+{% block content %}
+<div class='row'>   
+    
+    <div class="card">
+      <div class="card-body">
+        <blockquote class="blockquote">
+          <h1>Mon récapitulatif</h1>
+          <footer class="card-blockquote"><cite title="Source title text-sm">Vérifier vos informations avant de payer votre commande</cite></footer>
+        </blockquote>
+      </div>
+    </div>
+
+    <h4 class='mt-4 mb-4'>Récap de ma commande</h4>
+
+    <div class="list-group mb-4">
+          <a href="{{path('app_account')}}" class="list-group-item list-group-item-action list-group-item-info">Mom compte</a>
+          <a href="{{path('app_carte')}}" class="list-group-item list-group-item-action list-group-item-info">Mon panier</a>
+    </div>
+
+    <div class="col-md-6">
+         <div class="text-left">
+            <p><b>Mon adresse de livraison</b></p>
+            <div class="form-check">
+               {{delivery|raw}}
+            </div>
+            <hr>
+            <p><b>Mon transporteur</b></p>
+              <div class="form-check">
+              {{carrier.name}}<br/>
+              {{carrier.description}}<br/>
+              {{carrier.price|number_format(2, ',', '.')}} €
+              </div>
+
+         </div>
+    </div>
+        <div class="col-md-6">
+              <div class="text-center">
+                    <p><b>Rétrouver le recapitulatif de vos produits</b></p>
+              </div>
+            
+              <div class="order-summary">
+                    {% set total = null %}
+                    {% for key,product in cart %}
+                          <div class="row {% if key > 0 %}mt-2{% endif %}">
+                                <div class="col-2 my-auto">  
+                                    <img src="/uploads/{{product.product.illustration}}" alt="{{product.product.name}}" height="50px" width = "50px">
+                                </div>
+                                <div class="col-8">
+                                    {{product.product.name}}<br/>
+                                    <small>{{product.product.subtitle}}
+                                    <br>
+                                    x {{ product.quantity }}</small>
+                                </div>
+                                <div class="col-2 my-auto">
+                                     {{ (product.product.price * product.quantity)|number_format(2, ',', '.')}} € 
+                                </div>
+
+                          </div>
+                           {% set total = total + (product.product.price * product.quantity) %}
+                    {% endfor %}
+              </div>
+
+              <hr>
+              <strong>Sous-Total :  </strong>{{ total|number_format(2, ',', '.')}} € <br/>
+              <strong>Livraison :  </strong> {{ (carrier.price)|number_format(2, ',', '.')}} €<br/>
+              <hr>
+              <strong>Total : {{ (total + carrier.price )|number_format(2, ',', '.')}} €</strong>
+
+              <a href="" class="btn btn-success btn-block w-100 mt-3 mb-2">Payer avec la somme de {{ (total + carrier.price )|number_format(2, ',', '.')}} € </a> 
+    </div>
+</div>
+
+
+{% endblock %}

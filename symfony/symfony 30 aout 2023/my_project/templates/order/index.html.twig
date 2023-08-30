@@ -1,0 +1,61 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Valider ma commande - la boutique Française{% endblock %}
+
+{% block content %}
+<div class='row'>   
+    
+    <div class="card">
+      <div class="card-body">
+        <blockquote class="blockquote">
+          <h1>Je passe ma commande</h1>
+          <footer class="card-blockquote"><cite title="Source title text-sm">Choisissez vos preferences avant de passer votre commande sur la Boutique Française</cite></footer>
+        </blockquote>
+      </div>
+    </div>
+
+    <h4 class='mt-4 mb-4'>Commande</h4>
+
+    <div class="list-group mb-4">
+          <a href="{{path('app_account')}}" class="list-group-item list-group-item-action list-group-item-info">Mom compte</a>
+          <a href="{{path('app_carte')}}" class="list-group-item list-group-item-action list-group-item-info">Mon panier</a>
+    </div>
+
+    <div class="col-md-6">
+              {% set formHtml %}
+                   {{form_start(form, {action:path('app_order_recap')})}}
+                      {{form_label(form.addresses, 'Choisissez votre adresse de livraison')}}
+                       <a href="{{path('app_account_add_address')}}">Ajouter une nouvelle adresse de livraison</a>
+                   {{form_end(form)}}
+              {% endset %}
+
+              {{ formHtml|replace({'[br]':'<br/>'})|raw }}
+    </div>
+        <div class="col-md-6">
+              <div class="text-center">
+                    <p>Récap de la commande</p>
+                    <p>Rétrouver le recapitulatif de vos produits</p>
+              </div>
+            
+              <div class="order-summary">
+                    {% for key,product in cart %}
+                          <div class="row {% if key > 0 %}mt-2{% endif %}">
+                                <div class="col-2 my-auto">  
+                                    <img src="/uploads/{{product.product.illustration}}" alt="{{product.product.name}}" height="50px" width = "50px">
+                                </div>
+                                <div class="col-8">
+                                    {{product.product.name}}<br/>
+                                    <small>{{product.product.subtitle}}</small>
+                                </div>
+                                <div class="col-2 my-auto">
+                                  x {{ product.quantity }}
+                                </div>
+
+                          </div>
+                    {% endfor %}
+              </div>
+    </div>
+</div>
+
+
+{% endblock %}
