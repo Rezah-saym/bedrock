@@ -1,0 +1,22 @@
+{% extends 'twig/templates-twig/base.twig' %}
+
+{% block content %}
+
+<article>
+
+
+    <h1 class="mt-5">{{ post.title }}</h1>
+    <p>
+            Posted by {{ post.author.name }} <span>&bull;</span>
+            <time
+                datetime="{{ post.date('Y-m-d H:i:s') }}"
+            >{{ post.date }}</time>
+    <p>
+
+    <section class="mt-5">
+        {{ post.content }}
+    </section>
+
+</article>
+
+{% endblock %}

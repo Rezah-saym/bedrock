@@ -1,0 +1,79 @@
+{% extends 'twig/templates-twig/base.twig' %}
+
+{% block content %}
+	<article>
+		<h1 class="mt-5 mb-3 text-center">{{ post.title }}</h1>
+        <div class="row">
+			<div class="col-sm-4">
+				<img
+					src="{{ post.thumbnail.src }}"
+					alt="{{ post.thumbnail.alt }}"
+					class="img-fluid" {# Add the img-fluid class for responsive images #}
+				>
+			</div>
+			<div class="col-sm-8">
+				<div class="post-content mt-3">
+					{{ post.content }}
+				</div>
+			</div>
+		</div>
+	</article>
+{% endblock %}
+	
+{% block post_loaded %}
+
+<h2 class="mt-5 text-center">les actualités</h2>
+
+    <div class="row mt-5">
+        {% for post in post_query %}
+            <div class="col-sm-8 mt-2">
+                <h3><a href="{{ post.link }}">{{ post.title }}</a></h3>
+                <p>{{ post.excerpt }}</p>
+            </div>
+
+            <div class="col-sm-4 mt-2">
+                <img
+                    src="{{ post.thumbnail.src }}"
+                    alt="Thumbnail for {{ post.title }}"
+                    class="img-fluid"
+                />
+            </div>
+        {% endfor %}
+    </div>
+
+		{# Pagination section #}
+		<nav aria-label="Page navigation">
+			<ul class="pagination mt-5">
+				{% if post_query.pagination.prev %}
+					<li class="page-item">
+						<a class="page-link" href="{{ post_query.pagination.prev.link }}" aria-label="Previous">
+							<span aria-hidden="true">&laquo;</span>
+						</a>
+					</li>
+				{% endif %}
+
+				{% for page in post_query.pagination.pages %}
+					{% if page.isCurrent %}
+						<li class="page-item active">
+							<span class="page-link">{{ page.title }}</span>
+						</li>
+					{% else %}
+						<li class="page-item">
+							<a class="page-link" href="{{ page.link }}">{{ page.title }}</a>
+						</li>
+					{% endif %}
+				{% endfor %}
+
+				{% if post_query.pagination.next %}
+					<li class="page-item">
+						<a class="page-link" href="{{ post_query.pagination.next.link }}" aria-label="Next">
+							<span aria-hidden="true">&raquo;</span>
+						</a>
+					</li>
+				{% endif %}
+			</ul>
+		</nav>
+
+{% endblock %}
+
+		

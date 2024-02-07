@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html {{site.language_attributes}}>
+<head>
+    <meta charset = {{site.charset}}>
+    {{function ('wp_head')}}
+
+    <title>{% block title %}My Website{% endblock %}</title>
+</head>
+    <div class="row">
+        <div class="col-md-12">
+            <span> This is a twig page </span>
+        </div>
+        <div class="col-md-12">
+            <div class="breadcrumbs">
+                {{ get_breadcrumbs() }}
+            </div>
+        </div>
+    </div>
+
+    <div class="main-content">
+        {% block content %}{% endblock %}
+    </div>
+
+    <div class="post-content">
+        {% block post_loaded %}{% endblock %}
+    </div>
+
+
+ {{function ('wp_footer')}}
+
